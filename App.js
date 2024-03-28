@@ -1,9 +1,15 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import Search from './components/Search';
 
 export default function App() {
+  const searchHandler = (text) => {
+    console.log("text", text);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Weather</Text>
+      <Search searchHandler={searchHandler} />
     </View>
   );
 }
