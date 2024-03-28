@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Search from './components/Search';
+import Weather from './components/weather/Weather';
 
 export default function App() {
   const searchHandler = (text) => {
@@ -10,6 +11,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Weather</Text>
       <Search searchHandler={searchHandler} />
+      <Weather />
     </View>
   );
 }
