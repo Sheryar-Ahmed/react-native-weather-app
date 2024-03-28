@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import { getWeatherCity } from './_request';
-
-const Weather = ({ q }) => {
+import getWeatherImage, { get } from '../../utils/getWeatherImage';
+const Weather = ({ q, setBG }) => {
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(false);
 
@@ -12,6 +12,8 @@ const Weather = ({ q }) => {
                 setLoading(true);
                 try {
                     const result = await getWeatherCity(q);
+                    const imageurl = getWeatherImage(result?.data?.current?.cloud);
+                    setBG(imageurl)                
                     setData(result.data);
                 } catch (err) {
                     console.error(err);
@@ -24,8 +26,7 @@ const Weather = ({ q }) => {
                 setLoading(false);
             });
         }
-    }, [q]);
-
+    }, [q, setBG]);
     return (
         <View style={styles.container}>
             {isLoading ? (
@@ -94,8 +95,8 @@ const styles = StyleSheet.create({
         gap: 4,
     },
     prompt: {
-        color: 'green',
-        width: Dimensions.get('screen').width-50,
+        color: 'grey',
+        width: Dimensions.get('screen').width - 50,
         fontSize: 16,
         textAlign: 'center',
     },
